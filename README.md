@@ -16,7 +16,7 @@ The polyfill adds the `.matchContainer()` function to `Element.prototype` if and
 Element.matchContainer(containerQueryString: string)
 ```
 
-The function can be called on `Element` instances, the `containerQueryString` argument must be a syntactically valid `@container` query condition and must contain all parts that in the corresponding CSS would go between the `@container` and the rule block `{ ... }`.
+The function can be called on [`Element`](https://developer.mozilla.org/en-US/docs/Web/API/Element) instances, the `containerQueryString` argument must be a syntactically valid `@container` query condition and must contain all parts that in the corresponding CSS would go between the `@container` and the rule block `{ ... }`.
 The call returns a `ContainerQueryList` object (see below).
 
 Examples:
@@ -55,15 +55,17 @@ Examples:
 
 The `ContainerQueryList` inherits from `EventTarget` and therefore supports event listeners.
 
-An instance of `ContainerQueryList` exposes the properties:
+An instance of `ContainerQueryList` exposes two properties:
 
-- `container: string`: corresponds to the `containerQueryString` argument provided to `.matchContainer()`
-- `matches: boolean`: use this property to check whether the container query matches
+- `container: string` corresponds to the `containerQueryString` argument provided to `.matchContainer()`
+- `matches: boolean` use this property to check whether the container query matches
 
 To be able to react to changes of the `matches` state you can add an event listener for the `change` event.
 
 ```ts
-ContainerQueryList.addEventListener(
+const myElement = document.getElementById("my-element");
+const containerWidthQuery = myElement.matchContainer("(width < 400px)");
+containerWidthQuery.addEventListener(
   "change",
   (event: ContainerQueryListEvent) => {
     if (event.matches) console.log("The @container query matches currently");
@@ -75,10 +77,10 @@ ContainerQueryList.addEventListener(
 ### ContainerQueryListEvent
 
 The `ContainerQueryListEvent` is the event argument type produced by a `change` event on `ContainerQueryList`.
-It exposes the properties:
+It exposes two properties:
 
-- `container: string`: corresponds to the `containerQueryString` argument provided to `.matchContainer()`
-- `matches: boolean`: use this property to check whether the container query matches
+- `container: string` corresponds to the `containerQueryString` argument provided to `.matchContainer()`
+- `matches: boolean` use this property to check whether the container query matches
 
 ## How it works
 
