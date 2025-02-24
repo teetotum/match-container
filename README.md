@@ -84,14 +84,14 @@ It exposes two properties:
 
 ## How it works
 
-When `Element.matchContainer()` is called the polyfill inserts a corresponding `@container` query block into the CSSOM.
+When `Element.matchContainer()` is called the polyfill inserts a corresponding `@container` query into the CSSOM.
 The observed element is tethered to an attribute selector inside this query block by a corresponding `data-*` attribute, ensuring the target element is the only element matched by this selector.
 When the `@container` query matches a prepared CSS custom property is set on the observed element.
 A style observer (heavily inspired by [Bramus' StyleObserver](https://github.com/bramus/style-observer)) finally triggers the callback in the script code.
 
 ## Limitations
 
-The polyfill only adds the scripting API part for `@container` queries, is does not polyfill the CSS feature and will therefore not work in any browser that does not support `@container` queries in CSS.
+The polyfill only adds the scripting API part for `@container` queries, it does not polyfill the CSS feature and will therefore not work in any browser that does not support `@container` queries in CSS.
 
 ## Feedback
 
