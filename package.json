@@ -1,0 +1,23 @@
+{
+  "name": "match-container",
+  "version": "0.1.0",
+  "description": "Polyfill for the proposed Element.matchContainer() API which is the corresponding scripting API to the @container query CSS feature.",
+  "keywords": [
+    "polyfill",
+    "matchContainer",
+    "@container"
+  ],
+  "homepage": "https://github.com/teetotum/match-container",
+  "bugs": "https://github.com/teetotum/match-container/issues",
+  "repository": "https://github.com/teetotum/match-container",
+  "license": "MIT",
+  "author": {
+    "name": "Martin Winkler",
+    "url": "https://github.com/teetotum"
+  },
+  "main": "matchContainer.js",
+  "types": "types.d.ts",
+  "files": [
+    "types.d.ts"
+  ]
+}
