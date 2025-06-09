@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="matchContainer.js"></script>
+    <style>
+      .outer-container {
+        container-name: outer;
+        container-type: inline-size;
+        resize: horizontal;
+        padding: 40px;
+        background-color: blueviolet;
+        overflow: scroll;
+      }
+
+      .inner-container {
+        container-name: inner;
+        container-type: inline-size;
+        resize: horizontal;
+        padding: 40px;
+        background-color: cadetblue;
+        overflow: scroll;
+      }
+
+      .prop {
+        --test-prop: 1;
+      }
+
+      .test-element {
+        width: 100px;
+        height: 100px;
+        background-color: beige;
+      }
+
+      .matches {
+        background-color: green;
+      }
+
+      @container (width < 400px) {
+        .test-element.size-query-css {
+          background-color: green;
+        }
+      }
+
+      @container style(--test-prop) {
+        .test-element.style-query-css {
+          background-color: green;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="document.getElementById('outer').classList.toggle('prop')">
+      toggle --test-prop
+    </button>
+    <div class="outer-container" id="outer">
+      <div class="inner-container">
+        <div class="test-element size-query-css">size-query with css</div>
+
+        <div class="test-element style-query-css">style-query with css</div>
+
+        <div class="test-element size-query-script">size-query with script</div>
+
+        <div class="test-element style-query-script">
+          style-query with script
+        </div>
+      </div>
+    </div>
+    <script src="test.js"></script>
+  </body>
+</html>
