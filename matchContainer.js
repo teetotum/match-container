@@ -48,7 +48,12 @@
         inherits: false;
         initial-value: --false;
       }
-      @container ${containerQueryString} { [${markerAttribute}] { ${sentinelProperty}: --true; } }`;
+      @container ${containerQueryString} { [${markerAttribute}] { ${sentinelProperty}: --true; } }
+      [${markerAttribute}]{
+        @starting-style{
+          ${sentinelProperty}: --unknown; 
+        }
+      }`;
 
       containerQuerySheet.replaceSync(css);
       document.adoptedStyleSheets = [
