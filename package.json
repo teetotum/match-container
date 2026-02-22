@@ -9,7 +9,10 @@
   ],
   "homepage": "https://github.com/teetotum/match-container",
   "bugs": "https://github.com/teetotum/match-container/issues",
-  "repository": "https://github.com/teetotum/match-container",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teetotum/match-container.git"
+  },
   "license": "MIT",
   "author": {
     "name": "Martin Winkler",
