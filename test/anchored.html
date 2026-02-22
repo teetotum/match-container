@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="../matchContainer.js"></script>
+
+    <style>
+      body {
+        display: grid;
+        height: 200vh;
+        place-items: center;
+        --radius: 10px;
+        --border-start: var(--radius) var(--radius) 0 0;
+        --border-end: 0 0 var(--radius) var(--radius);
+      }
+      select {
+        &,
+        &::picker(select) {
+          appearance: base-select;
+          min-width: 30ch;
+        }
+        & {
+          border-radius: var(--border-start);
+        }
+        &:not(:open) {
+          border-radius: var(--radius);
+        }
+        &.matches {
+          border-radius: var(--border-end);
+          &:not(:open) {
+            border-radius: var(--radius);
+          }
+          &::picker(select) {
+            border-radius: var(--border-start);
+          }
+        }
+        &::picker(select) {
+          border-radius: var(--border-end);
+          position-area: bottom;
+          position-try: flip-block;
+          min-block-size: max-content;
+          container-type: anchored;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <select>
+      <button>
+        <div>
+          <selectedcontent> </selectedcontent>
+        </div>
+      </button>
+      <div>
+        <option value="carrot">Captain Carrot</option>
+        <option value="garlick">Magrat Garlick</option>
+        <option value="dibbler">Cut-Me-Own-Throat Dibbler</option>
+      </div>
+    </select>
+    <script>
+      const watchingEl = document.querySelector('[value="carrot"]');
+      const select = document.querySelector("select");
+
+      const positionedElementQuery = watchingEl.matchContainer(
+        "anchored(fallback: flip-block)",
+      );
+
+      const onPositionedElementChanged = (event) => {
+        console.count('switch')
+        if (event.matches) {
+          select.classList.add("matches");
+        } else {
+          select.classList.remove("matches");
+        }
+      };
+
+      positionedElementQuery.addEventListener(
+        "change",
+        onPositionedElementChanged,
+      );
+    </script>
+  </body>
+</html>
