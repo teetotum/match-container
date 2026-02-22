@@ -51,6 +51,12 @@ Examples:
   @container style(--themeColor: blue) or style(--themeColor: purple) { ... }
   ```
 
+- `.matchContainer("anchored(fallback: flip-block)")` corresponds to the following CSS
+  <!-- prettier-ignore -->
+  ```css
+  @container anchored(fallback: flip-block) { ... }
+  ```
+
 ### ContainerQueryList
 
 The `ContainerQueryList` inherits from `EventTarget` and therefore supports event listeners.

@@ -48,10 +48,14 @@
         inherits: false;
         initial-value: --false;
       }
-      @container ${containerQueryString} { [${markerAttribute}] { ${sentinelProperty}: --true; } }
-      [${markerAttribute}]{
-        @starting-style{
-          ${sentinelProperty}: --unknown; 
+      @container ${containerQueryString} {
+        [${markerAttribute}] {
+          ${sentinelProperty}: --true;
+        }
+      }
+      [${markerAttribute}] {
+        @starting-style {
+          ${sentinelProperty}: --false;
         }
       }`;
 
