@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../matchContainer.js"></script>
+    <style>
+      body {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 100px;
+        height: 200vh;
+        place-content: center;
+      }
+
+      .horizontal {
+        display: flex;
+        gap: 10px;
+      }
+
+      .anchor {
+        anchor-name: --test-anchor;
+      }
+
+      .tooltip {
+        position: fixed;
+        margin-top: 1rem;
+        position-anchor: --test-anchor;
+        position-area: bottom;
+        position-try-fallbacks: flip-block;
+        container-type: anchored;
+
+        &::before {
+          content: '▲';
+          position: absolute;
+          bottom: 100%;
+        }
+      }
+
+      @container anchored(fallback: flip-block) {
+        .test-element.anchored-query-css::before {
+          content: '▼';
+          bottom: auto;
+          top: 100%;
+        }
+      }
+
+      .anchor {
+        background: lightblue;
+        padding: 0.5rem;
+      }
+
+      .tooltip {
+        background: cadetblue;
+        color: white;
+        padding: 0.5rem;
+        
+        &::before {
+          color: cadetblue;
+          margin: 0;
+          line-height: 0.5;
+          left: 0;
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      select {
+        --radius: 10px;
+        --border-start: var(--radius) var(--radius) 0 0;
+        --border-end: 0 0 var(--radius) var(--radius);
+        &,
+        &::picker(select) {
+          appearance: base-select;
+          min-width: 30ch;
+        }
+        & {
+          border-radius: var(--border-start);
+        }
+        &:not(:open) {
+          border-radius: var(--radius);
+        }
+        &.is-in-fallback-flip-block {
+          border-radius: var(--border-end);
+          &:not(:open) {
+            border-radius: var(--radius);
+          }
+          &::picker(select) {
+            border-radius: var(--border-start);
+          }
+        }
+        &::picker(select) {
+          border-radius: var(--border-end);
+          position-area: bottom;
+          position-try: flip-block;
+          min-block-size: max-content;
+          container-type: anchored;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="horizontal">
+      <span>anchored-query with css</span>
+      <div>
+        <div class="anchor">Anchor</div>
+        <div class="tooltip test-element anchored-query-css">Positioned Element</div>
+      </div>
+    </div>
+    <div class="horizontal">
+      <span>anchored-query with script</span>
+      <select>
+        <button>
+          <div>
+            <selectedcontent> </selectedcontent>
+          </div>
+        </button>
+        <div>
+          <option value="carrot">Captain Carrot</option>
+          <option value="garlick">Magrat Garlick</option>
+          <option value="dibbler">Cut-Me-Own-Throat Dibbler</option>
+        </div>
+      </select>
+    </div>
+    <script>
+      const watchingEl = document.querySelector('[value="carrot"]');
+      const select = document.querySelector("select");
+
+      const positionedElementQuery = watchingEl.matchContainer(
+        "anchored(fallback: flip-block)",
+      );
+
+      const classWhenMatches = "is-in-fallback-flip-block";
+      const onPositionedElementChanged = (event) => {
+        console.count('switch')
+        if (event.matches) {
+          select.classList.add(classWhenMatches);
+        } else {
+          select.classList.remove(classWhenMatches);
+        }
+      };
+
+      positionedElementQuery.addEventListener("change", onPositionedElementChanged);
+    </script>
+  </body>
+</html>

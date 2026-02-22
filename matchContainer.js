@@ -55,7 +55,7 @@
       }
       [${markerAttribute}] {
         @starting-style {
-          ${sentinelProperty}: --false;
+          ${sentinelProperty}: --unknown;
         }
       }`;
 
