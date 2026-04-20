@@ -14,4 +14,4 @@ declare global {
   }
 }
 
-declare module "match-container" {}
+export {};
