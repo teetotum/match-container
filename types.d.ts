@@ -14,4 +14,6 @@ declare global {
   }
 }
 
+// this is needed to make TS treat this file as a module, otherwise the `declare global` section is ignored
+// see https://github.com/teetotum/match-container/pull/3
 export {};
