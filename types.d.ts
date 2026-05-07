@@ -4,8 +4,8 @@ declare global {
   }
 
   interface ContainerQueryList extends EventTarget {
-    container: string;
-    matches: boolean;
+    readonly container: string;
+    readonly matches: boolean;
 
     addEventListener(type: 'change', callback: ((eventArgs: ContainerQueryListEvent) => unknown) | ({ handleEvent(eventArgs: ContainerQueryListEvent): unknown }) | null, options?: AddEventListenerOptions | boolean): void;
     addEventListener(type: string, callback: EventListenerOrEventListenerObject | null, options?: AddEventListenerOptions | boolean): void;
@@ -15,8 +15,8 @@ declare global {
   }
 
   interface ContainerQueryListEvent extends Event {
-    container: string;
-    matches: boolean;
+    readonly container: string;
+    readonly matches: boolean;
   }
 }
 
