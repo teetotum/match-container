@@ -41,13 +41,16 @@
       const markerAttribute = `data-${unique_name}`;
       element.setAttribute(markerAttribute, "");
       const sentinelProperty = `--${unique_name}`;
+
+      const globalSheet = new CSSStyleSheet();
       const containerQuerySheet = new CSSStyleSheet();
-      const css = `
+      const globalCSS = `
       @property ${sentinelProperty} {
         syntax: '<custom-ident>';
         inherits: false;
         initial-value: --false;
-      }
+      }`;
+      const containerQueryCSS = `
       @container ${containerQueryString} {
         [${markerAttribute}] {
           ${sentinelProperty}: --true;
@@ -59,7 +62,10 @@
         }
       }`;
 
-      containerQuerySheet.replaceSync(css);
+      globalSheet.replaceSync(globalCSS);
+      containerQuerySheet.replaceSync(containerQueryCSS);
+
+      document.adoptedStyleSheets = [...document.adoptedStyleSheets, globalSheet];
 
       const document_or_shadowRoot = element.getRootNode();
       document_or_shadowRoot.adoptedStyleSheets = [...document_or_shadowRoot.adoptedStyleSheets, containerQuerySheet];
