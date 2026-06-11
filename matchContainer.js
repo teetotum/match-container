@@ -60,10 +60,10 @@
       }`;
 
       containerQuerySheet.replaceSync(css);
-      document.adoptedStyleSheets = [
-        ...document.adoptedStyleSheets,
-        containerQuerySheet,
-      ];
+
+      const document_or_shadowRoot = element.getRootNode();
+      document_or_shadowRoot.adoptedStyleSheets = [...document_or_shadowRoot.adoptedStyleSheets, containerQuerySheet];
+
       const style = getComputedStyle(element);
       this.matches = style.getPropertyValue(sentinelProperty) === "--true";
 
